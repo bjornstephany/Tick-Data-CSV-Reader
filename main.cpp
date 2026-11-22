@@ -42,9 +42,28 @@ vector<Trade> getTrades(string fileName)
     return trades;
 }
 
+int getTradeCount(vector<Trade> trades)
+{
+    return trades.size();
+}
+
+double getMid(vector<Trade> trades)
+{
+    double askSum {0.0};
+    double bidSum {0.0};
+    for ( Trade& t : trades )
+    {
+        askSum+=t.ask;
+        bidSum+=t.bid;
+    }
+    return (askSum + bidSum) / getTradeCount(trades) / 2;
+}
+
 int main()
 {
     vector<Trade> trades = getTrades("data/lehman.csv");
     int64_t test = trades[0].time;
     cout << test << "\n";
+    cout << "Number of trades in lehman: " << getTradeCount(trades) << "\n";
+    cout << "Mid-price: " << getMid(trades) << "\n";
 }
