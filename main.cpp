@@ -11,14 +11,19 @@ struct Trade
     double bid; 
 };
 
-void getTrades(string fileName)
+vector<Trade> getTrades(string fileName)
 {
-    ifstream file (fileName);
-    if (!file) { cerr << "Could not open file\n";}
-
     vector<Trade> trades;
-    string line;
 
+    ifstream file (fileName);
+    if (!file)
+    { 
+        cerr << "Could not open file\n";
+        return trades;
+    }
+    
+    string line;
+    getline(file, line);
     while ( getline (file, line) )
     {
         stringstream ss(line);
@@ -34,9 +39,12 @@ void getTrades(string fileName)
         t.bid = stod(bid);
         trades.push_back(t);
     }
+    return trades;
 }
 
 int main()
 {
-    getTrades("data/covid.csv");
+    vector<Trade> trades = getTrades("data/lehman.csv");
+    int64_t test = trades[0].time;
+    cout << test << "\n";
 }
