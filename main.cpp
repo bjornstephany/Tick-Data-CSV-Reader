@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <limits>
 using namespace std;
 
 struct Trade
@@ -65,7 +66,22 @@ double getMeanMid(vector<Trade> trades)
 
 double getMinMid(vector<Trade> trades)
 {
-    return 0;
+    double minMid = numeric_limits<double>::max();
+    for ( Trade t : trades )
+    {
+        minMid = min(minMid, getMid(t));
+    }
+    return minMid;
+}
+
+double getMaxMid(vector<Trade> trades)
+{
+    double maxMid = numeric_limits<double>::min();
+    for ( Trade t : trades )
+    {
+        maxMid = max(maxMid, getMid(t));
+    }
+    return maxMid;
 }
 
 int main()
@@ -73,4 +89,6 @@ int main()
     vector<Trade> trades = getTrades("data/lehman.csv");
     cout << "Number of trades in lehman: " << getTradeCount(trades) << "\n";
     cout << "Mean Mid-price: " << getMeanMid(trades) << "\n";
+    cout << "Min Mid-price: " << getMinMid(trades) << "\n";
+    cout << "Max Mid-price: " << getMaxMid(trades) << "\n";
 }
