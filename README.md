@@ -8,6 +8,11 @@ The data sets:
 - 6 May 2010 — flash crash
 - 16 March 2020 — COVID market crash
 
+Data meaning:
+- timestamp	= Time of the quote update, in Unix milliseconds
+- askPrice	= Lowest price at which someone is willing to sell
+- bidPrice	= Highest price at which someone is willing to buy
+
 The Statistics;
 - Mid-price
 - Mid-price OHLC
